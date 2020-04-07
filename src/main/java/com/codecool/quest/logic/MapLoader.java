@@ -1,8 +1,7 @@
 package com.codecool.quest.logic;
-
-import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.items.Sword;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -34,17 +33,18 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell);
+                            map.setSkeleton(new Skeleton(cell));
+                            break;
+                        case 'Q':
+                            cell.setType(CellType.SWORD);
+//                             map.setSword(new Sword(cell));
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
                             break;
-                        case 't':
-                        case 'k':
-                            cell.setType(CellType.FLOOR);
-                            new Item(cell);
-                            break;
+
+
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
