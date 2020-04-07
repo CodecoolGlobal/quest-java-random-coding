@@ -4,7 +4,7 @@ import com.codecool.quest.logic.actors.Actor;
 
 public class Cell implements Drawable {
     private CellType type;
-    private Actor actor;
+    private Drawable occupant;
     private GameMap gameMap;
     private int x, y;
 
@@ -23,12 +23,12 @@ public class Cell implements Drawable {
         this.type = type;
     }
 
-    public void setActor(Actor actor) {
-        this.actor = actor;
+    public void setOccupant(Drawable occupant) {
+        this.occupant = occupant;
     }
 
-    public Actor getActor() {
-        return actor;
+    public Drawable getOccupant() {
+        return occupant;
     }
 
     public Cell getNeighbor(int dx, int dy) {
