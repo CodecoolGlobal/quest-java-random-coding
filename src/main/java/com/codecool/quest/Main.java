@@ -8,8 +8,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -22,6 +24,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label inventoryLabel = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -32,10 +35,21 @@ public class Main extends Application {
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
+        Label label = new Label();
+        GridPane.setConstraints(label, 6, 10);
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
 
+        ui.add(new Label("Inventory: "), 0, 1);
+        ui.add(inventoryLabel, 1, 0);
+
+        Button button = new Button("Pick up");
+        ui.add(button, 6, 10);
+
+        button.setOnAction(actionEvent ->  {
+            System.out.println("clicked");
+        });
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
@@ -48,6 +62,8 @@ public class Main extends Application {
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
+        borderPane.requestFocus();
+        borderPane.setFocusTraversable(false);
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {

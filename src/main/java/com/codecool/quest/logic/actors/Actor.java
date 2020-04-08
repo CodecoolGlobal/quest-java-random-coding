@@ -14,7 +14,7 @@ public abstract class Actor extends AbstractDrawable {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (!nextCell.getTileName().equals("wall")) {
+        if (!nextCell.getTileName().equals("wall") && !(nextCell.getOccupant() instanceof Actor)) {
             cell.setOccupant(null);
             nextCell.setOccupant(this);
             cell = nextCell;
