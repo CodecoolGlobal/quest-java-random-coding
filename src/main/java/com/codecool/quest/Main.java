@@ -1,6 +1,7 @@
 package com.codecool.quest;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import javafx.application.Application;
@@ -17,6 +18,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
+
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
@@ -25,7 +28,7 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Label inventoryLabel = new Label();
-
+    static Button button = new Button("Pick up");
     public static void main(String[] args) {
         launch(args);
     }
@@ -44,14 +47,17 @@ public class Main extends Application {
         ui.add(new Label("Inventory: "), 0, 1);
         ui.add(inventoryLabel, 1, 0);
 
-        Button button = new Button("Pick up");
+
         ui.add(button, 6, 10);
+        button.setVisible(false);
 
-        button.setOnAction(actionEvent ->  {
-            System.out.println("clicked");
-        });
+
+
         BorderPane borderPane = new BorderPane();
+        button.setOnAction(actionEvent -> {
 
+            borderPane.requestFocus();
+        });
         borderPane.setCenter(canvas);
         borderPane.setRight(ui);
 
@@ -63,7 +69,6 @@ public class Main extends Application {
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
         borderPane.requestFocus();
-        borderPane.setFocusTraversable(false);
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
@@ -87,6 +92,14 @@ public class Main extends Application {
         }
     }
 
+    public  static void showPickUpButton(){
+        button.setVisible(true);
+    }
+
+    public  static void hidePickUpButton(){
+        button.setVisible(false);
+    }
+
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -103,3 +116,4 @@ public class Main extends Application {
         healthLabel.setText("" + map.getPlayer().getHealth());
     }
 }
+

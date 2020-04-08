@@ -1,16 +1,20 @@
 package com.codecool.quest.logic.actors;
 
+import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Drawable;
 import com.codecool.quest.logic.AbstractDrawable;
+import com.codecool.quest.logic.items.Item;
+import com.codecool.quest.logic.items.Sword;
 
 public abstract class Actor extends AbstractDrawable {
     private int health = 10;
-
     public Actor(Cell cell) {
         super(cell);
     }
+
+
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
@@ -18,8 +22,18 @@ public abstract class Actor extends AbstractDrawable {
             cell.setOccupant(null);
             nextCell.setOccupant(this);
             cell = nextCell;
+            if (nextCell.getTileName().equals("sword")) {
+                Main.showPickUpButton();
+
+            } else {
+                Main.hidePickUpButton();
+            }
+
+
         }
+
     }
+
 
     public int getHealth() {
         return health;

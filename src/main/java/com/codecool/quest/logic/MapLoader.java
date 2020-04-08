@@ -42,7 +42,7 @@ public class MapLoader {
                             break;
                         case 'w':
                             cell.setType(CellType.FLOOR);
-                            new Sword(cell);
+                            map.setSword(new Sword(cell));
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
