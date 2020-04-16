@@ -1,8 +1,8 @@
 package com.codecool.quest;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
+import com.codecool.quest.logic.Inventory;
 import com.codecool.quest.logic.MapLoader;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -11,14 +11,12 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.awt.event.ActionEvent;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
@@ -29,6 +27,7 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label inventoryLabel = new Label();
     static Button button = new Button("Pick up");
+    private Inventory inventory = new Inventory();
     public static void main(String[] args) {
         launch(args);
     }
@@ -46,7 +45,11 @@ public class Main extends Application {
 
         ui.add(new Label("Inventory: "), 0, 1);
         ui.add(inventoryLabel, 1, 0);
-
+        Canvas inventoryCanvas = new Canvas(
+                Tiles.TILE_WIDTH,
+                Tiles.TILE_WIDTH);
+        ui.add(inventoryCanvas, 0, 0);
+        ui.add(inventory.createCanvas("sword"), 0, 0);
 
         ui.add(button, 6, 10);
         button.setVisible(false);
@@ -55,7 +58,6 @@ public class Main extends Application {
 
         BorderPane borderPane = new BorderPane();
         button.setOnAction(actionEvent -> {
-
             borderPane.requestFocus();
         });
         borderPane.setCenter(canvas);
