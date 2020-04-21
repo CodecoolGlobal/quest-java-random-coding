@@ -22,8 +22,9 @@ public abstract class Actor extends AbstractDrawable {
             cell.setOccupant(null);
             nextCell.setOccupant(this);
             cell = nextCell;
-            if (nextCell.getTileName().equals("sword")) {
+            if (cell.getItem() != null) {
                 Main.showPickUpButton();
+//                cell.setItem(null);
 
             } else {
                 Main.hidePickUpButton();

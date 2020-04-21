@@ -1,9 +1,6 @@
 package com.codecool.quest;
 
-import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.GameMap;
-import com.codecool.quest.logic.Inventory;
-import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -49,7 +46,7 @@ public class Main extends Application {
                 Tiles.TILE_WIDTH,
                 Tiles.TILE_WIDTH);
         ui.add(inventoryCanvas, 0, 0);
-        ui.add(inventory.createCanvas("sword"), 0, 0);
+//        ui.add(inventory.createCanvas("sword"), 20, 0);
 
         ui.add(button, 6, 10);
         button.setVisible(false);
@@ -57,15 +54,18 @@ public class Main extends Application {
 
 
         BorderPane borderPane = new BorderPane();
-        button.setOnAction(actionEvent -> {
-            borderPane.requestFocus();
-        });
         borderPane.setCenter(canvas);
         borderPane.setRight(ui);
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         refresh();
+        button.setOnAction(actionEvent -> {
+
+            ui.add(inventory.createCanvas(map.getPlayer().getCell().getItem().getTileName()), 20, 0);
+            map.getPlayer().getCell().setItem(null);
+            borderPane.requestFocus();
+        });
         scene.setOnKeyPressed(this::onKeyPressed);
 
         primaryStage.setTitle("Codecool Quest");
@@ -102,9 +102,15 @@ public class Main extends Application {
         button.setVisible(false);
     }
 
+
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+//        button.setOnAction(actionEvent -> {
+//
+//            ui.add(inventory.createCanvas(map.getPlayer().getTileName()), 20, 0);
+//            borderPane.requestFocus();
+//        });
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
