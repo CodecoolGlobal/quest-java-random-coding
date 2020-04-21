@@ -18,13 +18,12 @@ public abstract class Actor extends AbstractDrawable {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (!nextCell.getTileName().equals("wall") && !(nextCell.getOccupant() instanceof Actor)) {
+        if (!nextCell.getTileName().equals("wall") && !(nextCell.getOccupant() instanceof Actor) && !nextCell.getTileName().equals("closed_door")) {
             cell.setOccupant(null);
             nextCell.setOccupant(this);
             cell = nextCell;
             if (cell.getItem() != null) {
                 Main.showPickUpButton();
-//                cell.setItem(null);
 
             } else {
                 Main.hidePickUpButton();
