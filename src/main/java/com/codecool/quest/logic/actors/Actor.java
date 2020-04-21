@@ -10,10 +10,10 @@ import com.codecool.quest.logic.items.Sword;
 
 public abstract class Actor extends AbstractDrawable {
     private int health = 10;
+
     public Actor(Cell cell) {
         super(cell);
     }
-
 
 
     public void move(int dx, int dy) {

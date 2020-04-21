@@ -65,6 +65,7 @@ public class Main extends Application {
 
         button.setOnAction(actionEvent -> {
             ui.add(inventory.createCanvas(map.getPlayer().getCell().getItem().getTileName()), colNum.get(), rowNum.getAndIncrement());
+            inventory.setInventoryList(map.getPlayer().getCell().getItem().getTileName());
             map.getPlayer().getCell().setItem(null);
             borderPane.requestFocus();
         });
