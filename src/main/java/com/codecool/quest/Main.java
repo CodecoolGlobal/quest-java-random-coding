@@ -8,12 +8,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
@@ -35,7 +36,7 @@ public class Main extends Application {
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
         Label label = new Label();
-        GridPane.setConstraints(label, 6, 10);
+        GridPane.setConstraints(label, 10, 20);
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
@@ -46,7 +47,6 @@ public class Main extends Application {
                 Tiles.TILE_WIDTH,
                 Tiles.TILE_WIDTH);
         ui.add(inventoryCanvas, 0, 0);
-//        ui.add(inventory.createCanvas("sword"), 20, 0);
 
         ui.add(button, 6, 10);
         button.setVisible(false);
@@ -60,9 +60,11 @@ public class Main extends Application {
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         refresh();
-        button.setOnAction(actionEvent -> {
+        AtomicInteger colNum = new AtomicInteger();
+        AtomicInteger rowNum = new AtomicInteger(5);
 
-            ui.add(inventory.createCanvas(map.getPlayer().getCell().getItem().getTileName()), 20, 0);
+        button.setOnAction(actionEvent -> {
+            ui.add(inventory.createCanvas(map.getPlayer().getCell().getItem().getTileName()), colNum.get(), rowNum.getAndIncrement());
             map.getPlayer().getCell().setItem(null);
             borderPane.requestFocus();
         });
@@ -106,11 +108,6 @@ public class Main extends Application {
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-//        button.setOnAction(actionEvent -> {
-//
-//            ui.add(inventory.createCanvas(map.getPlayer().getTileName()), 20, 0);
-//            borderPane.requestFocus();
-//        });
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
