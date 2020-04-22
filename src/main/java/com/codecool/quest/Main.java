@@ -64,8 +64,12 @@ public class Main extends Application {
         AtomicInteger rowNum = new AtomicInteger(5);
 
         button.setOnAction(actionEvent -> {
-            ui.add(inventory.createCanvas(map.getPlayer().getCell().getItem().getTileName()), colNum.get(), rowNum.getAndIncrement());
             inventory.setInventoryList(map.getPlayer().getCell().getItem().getTileName());
+            for (String item : inventory.getInventoryList()) {
+                ui.getChildren().remove(item);
+                ui.add(inventory.createCanvas(item), colNum.get(), rowNum.getAndIncrement());
+            }
+//            ui.add(inventory.createCanvas(map.getPlayer().getCell().getItem().getTileName()), colNum.get(), rowNum.getAndIncrement());
             map.getPlayer().getCell().setItem(null);
             borderPane.requestFocus();
         });
@@ -120,6 +124,8 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+
     }
+
 }
 

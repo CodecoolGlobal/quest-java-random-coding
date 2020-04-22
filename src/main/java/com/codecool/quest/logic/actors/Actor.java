@@ -27,6 +27,7 @@ public abstract class Actor extends AbstractDrawable {
 
         if (nextCell.getTileName().equals("closed_door") && inventoryList.contains("key")) {
             nextCell.setType(CellType.OPEN);
+            inventoryList.remove("key");
         }
 
     }
