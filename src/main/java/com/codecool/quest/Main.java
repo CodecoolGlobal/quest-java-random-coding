@@ -1,5 +1,5 @@
 package com.codecool.quest;
-
+import com.codecool.quest.inventoryui.*;
 import com.codecool.quest.logic.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -14,8 +14,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
@@ -25,51 +23,47 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label inventoryLabel = new Label();
     static Button button = new Button("Pick up");
-    private Inventory inventory = new Inventory();
+    public static Inventory inventory = new Inventory();
+    private InventoryUI inventoryui = new InventoryUI();
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        GridPane ui = new GridPane();
-        ui.setPrefWidth(200);
-        ui.setPadding(new Insets(10));
+        GridPane rightPanel = new GridPane();
+        GridPane inventoryPanel = new GridPane();
+        rightPanel.setPrefWidth(200);
+        rightPanel.setPadding(new Insets(10));
         Label label = new Label();
         GridPane.setConstraints(label, 10, 20);
+        inventoryui.setInventoryUI(inventoryPanel);
+        inventory.setUI(inventoryui);
+        rightPanel.add(inventoryPanel, 10,0);
+        rightPanel.add(new Label("Health: "), 0, 0);
+        rightPanel.add(healthLabel, 1, 0);
 
-        ui.add(new Label("Health: "), 0, 0);
-        ui.add(healthLabel, 1, 0);
-
-        ui.add(new Label("Inventory: "), 0, 1);
-        ui.add(inventoryLabel, 1, 0);
+        rightPanel.add(new Label("Inventory: "), 0, 1);
+        rightPanel.add(inventoryLabel, 1, 0);
         Canvas inventoryCanvas = new Canvas(
                 Tiles.TILE_WIDTH,
                 Tiles.TILE_WIDTH);
-        ui.add(inventoryCanvas, 0, 0);
+        rightPanel.add(inventoryCanvas, 0, 0);
 
-        ui.add(button, 6, 10);
+        rightPanel.add(button, 6, 10);
         button.setVisible(false);
 
 
 
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(canvas);
-        borderPane.setRight(ui);
+        borderPane.setRight(rightPanel);
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         refresh();
-        AtomicInteger colNum = new AtomicInteger();
-        AtomicInteger rowNum = new AtomicInteger(5);
-
         button.setOnAction(actionEvent -> {
-            inventory.setInventoryList(map.getPlayer().getCell().getItem().getTileName());
-            for (String item : inventory.getInventoryList()) {
-                ui.getChildren().remove(item);
-                ui.add(inventory.createCanvas(item), colNum.get(), rowNum.getAndIncrement());
-            }
-//            ui.add(inventory.createCanvas(map.getPlayer().getCell().getItem().getTileName()), colNum.get(), rowNum.getAndIncrement());
+            inventory.addItem(map.getPlayer().getCell().getItem().getTileName());
             map.getPlayer().getCell().setItem(null);
             borderPane.requestFocus();
         });
