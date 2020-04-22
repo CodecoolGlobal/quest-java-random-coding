@@ -4,6 +4,7 @@ import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.items.Item;
 
 public class Cell implements Drawable {
+    private Actor actor;
     private CellType type;
     private Item item;
     private Drawable occupant;
@@ -28,6 +29,7 @@ public class Cell implements Drawable {
     public void setOccupant(Drawable occupant) {
         this.occupant = occupant;
     }
+
     public void setItem(Item item) {
         this.item = item;
     }
@@ -35,6 +37,7 @@ public class Cell implements Drawable {
     public Item getItem() {
         return item;
     }
+
     public Drawable getOccupant() {
         return occupant;
     }
@@ -54,5 +57,17 @@ public class Cell implements Drawable {
 
     public int getY() {
         return y;
+    }
+
+    public Actor getActor() {
+        return actor;
+    }
+
+    public void setActor(Actor actor) {
+        this.actor = actor;
+    }
+
+    public boolean hasActor() {
+        return actor != null;
     }
 }

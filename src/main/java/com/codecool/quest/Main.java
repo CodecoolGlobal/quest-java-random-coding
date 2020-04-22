@@ -39,7 +39,7 @@ public class Main extends Application {
         GridPane.setConstraints(label, 10, 20);
         inventoryui.setInventoryUI(inventoryPanel);
         inventory.setUI(inventoryui);
-        rightPanel.add(inventoryPanel, 10,0);
+        rightPanel.add(inventoryPanel, 0,6);
         rightPanel.add(new Label("Health: "), 0, 0);
         rightPanel.add(healthLabel, 1, 0);
 
@@ -65,6 +65,7 @@ public class Main extends Application {
         button.setOnAction(actionEvent -> {
             inventory.addItem(map.getPlayer().getCell().getItem().getTileName());
             map.getPlayer().getCell().setItem(null);
+            hidePickUpButton();
             borderPane.requestFocus();
         });
         scene.setOnKeyPressed(this::onKeyPressed);
@@ -110,9 +111,13 @@ public class Main extends Application {
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
-                if (cell.getOccupant() != null) {
-                    Tiles.drawTile(context, cell.getOccupant(), x, y);
-                } else {
+                if (cell.getActor() != null) {
+                    Tiles.drawTile(context, cell.getActor(),x, y);
+                } else if (cell.getItem() != null) {
+                    Tiles.drawTile(context, cell.getItem(),x, y);
+                }
+
+                else {
                     Tiles.drawTile(context, cell, x, y);
                 }
             }

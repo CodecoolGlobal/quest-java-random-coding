@@ -5,16 +5,26 @@ import com.codecool.quest.logic.*;
 
 public abstract class Actor extends AbstractDrawable {
     private int health = 10;
+    private int strikeForce = 5;
 
     public Actor(Cell cell) {
         super(cell);
+        cell.setActor(this);
     }
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (!nextCell.getTileName().equals("wall") && !(nextCell.getOccupant() instanceof Actor) && !nextCell.getTileName().equals("closed_door")) {
-            cell.setOccupant(null);
-            nextCell.setOccupant(this);
+        if (nextCell.hasActor()) {
+            Actor enemy = nextCell.getActor();
+            enemy.changeHealth(this.strikeForce);
+            System.out.println(enemy.getHealth());
+            if (enemy.getHealth() <= 0) {
+                nextCell.setActor(null);
+            }
+        }
+        if (!nextCell.getTileName().equals("wall") && !(nextCell.hasActor()) && !nextCell.getTileName().equals("closed_door")) {
+            cell.setActor(null);
+            nextCell.setActor(this);
             cell = nextCell;
             if (cell.getItem() != null) {
                 Main.showPickUpButton();
@@ -28,10 +38,16 @@ public abstract class Actor extends AbstractDrawable {
             Main.inventory.removeItem("key");
         }
 
+
+
     }
 
 
     public int getHealth() {
         return health;
+    }
+
+    public void changeHealth(int numberToDeduct) {
+        health -= numberToDeduct;
     }
 }
