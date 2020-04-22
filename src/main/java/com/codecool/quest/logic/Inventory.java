@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Inventory {
 
-    private List<String> inventoryList = new ArrayList<>();
+    public static List<String> inventoryList = new ArrayList<>();
 
     public Node createCanvas(String item) {
         Canvas inventoryCanvas = new Canvas(
