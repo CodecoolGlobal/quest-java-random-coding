@@ -5,7 +5,11 @@ import com.codecool.quest.logic.*;
 
 public abstract class Actor extends AbstractDrawable {
     private int health = 10;
+    private int spiderhealth = 5;
+    private int goblinhealth = 500;
     private int strikeForce = 5;
+
+
 
     public Actor(Cell cell) {
         super(cell);
@@ -21,6 +25,12 @@ public abstract class Actor extends AbstractDrawable {
             if (enemy.getHealth() <= 0) {
                 nextCell.setActor(null);
             }
+            if (enemy.getHealth() > 0){
+              health-=2;
+            }
+        }
+        if (Main.inventory.getInventoryList().contains("sword")){
+            strikeForce+=3;
         }
         if (!nextCell.getTileName().equals("wall") && !(nextCell.hasActor()) && !nextCell.getTileName().equals("closed_door")) {
             cell.setActor(null);
@@ -45,6 +55,10 @@ public abstract class Actor extends AbstractDrawable {
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public void changeHealth(int numberToDeduct) {

@@ -1,7 +1,9 @@
 package com.codecool.quest.logic;
 
+import com.codecool.quest.logic.actors.Goblin;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.actors.Spider;
 import com.codecool.quest.logic.items.Sword;
 import com.codecool.quest.logic.items.Key;
 import java.io.InputStream;
@@ -50,6 +52,14 @@ public class MapLoader {
                         case 'k':
                             cell.setType(CellType.FLOOR);
                             cell.setItem(new Key(cell));
+                            break;
+                        case 'p':
+                            cell.setType(CellType.FLOOR);
+                            new Spider(cell);
+                            break;
+                        case 'g':
+                            cell.setType(CellType.FLOOR);
+                            new Goblin(cell);
                             break;
 
                         default:
