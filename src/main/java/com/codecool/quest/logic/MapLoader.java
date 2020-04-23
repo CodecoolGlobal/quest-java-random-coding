@@ -85,6 +85,12 @@ public class MapLoader {
                         case 'e':
                             cell.setType(CellType.WEB);
                             break;
+                        case 't':
+                            cell.setType(CellType.TURN);
+                            break;
+                        case 'z':
+                            cell.setType(CellType.CIRCLE);
+                            break;
 
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

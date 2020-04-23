@@ -11,7 +11,9 @@ public enum CellType {
     RIVER("river"),
     CROWN("crown"),
     SKULL("skull"),
-    WEB("web");
+    WEB("web"),
+    TURN("turn"),
+    CIRCLE("circle");
 
     private final String tileName;
 
