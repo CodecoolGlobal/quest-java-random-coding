@@ -1,9 +1,6 @@
 package com.codecool.quest.logic;
 
-import com.codecool.quest.logic.actors.Goblin;
-import com.codecool.quest.logic.actors.Player;
-import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.actors.Spider;
+import com.codecool.quest.logic.actors.*;
 import com.codecool.quest.logic.items.Rod;
 import com.codecool.quest.logic.items.Sword;
 import com.codecool.quest.logic.items.Key;
@@ -71,6 +68,22 @@ public class MapLoader {
                             break;
                         case 'a':
                             cell.setType(CellType.FOOD);
+                            break;
+                        case 'i':
+                            cell.setType(CellType.RIVER);
+                            break;
+                        case 'b':
+                            cell.setType(CellType.FLOOR);
+                            new Boss(cell);
+                            break;
+                        case 'u':
+                            cell.setType(CellType.SKULL);
+                            break;
+                        case 'c':
+                            cell.setType(CellType.CROWN);
+                            break;
+                        case 'e':
+                            cell.setType(CellType.WEB);
                             break;
 
                         default:

@@ -38,6 +38,7 @@ public abstract class Actor extends AbstractDrawable {
             if (cell.getTileName().equals("apple")) {
                 cell.setType(CellType.FLOOR);
             }
+
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;

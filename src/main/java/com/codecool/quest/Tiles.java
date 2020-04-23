@@ -40,6 +40,11 @@ public class Tiles {
         tileMap.put("goblin", new Tile(29,2));
         tileMap.put("tree", new Tile(1, 1));
         tileMap.put("apple", new Tile(15, 29));
+        tileMap.put("crown", new Tile(11, 24));
+        tileMap.put("river", new Tile(12, 5));
+        tileMap.put("skull", new Tile(0, 15));
+        tileMap.put("boss", new Tile(30, 6));
+        tileMap.put("web", new Tile(31, 12));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
