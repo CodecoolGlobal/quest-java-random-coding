@@ -1,6 +1,7 @@
 package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.*;
+import com.codecool.quest.logic.items.Crown;
 import com.codecool.quest.logic.items.Rod;
 import com.codecool.quest.logic.items.Sword;
 import com.codecool.quest.logic.items.Key;
@@ -55,6 +56,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             cell.setItem(new Key(cell));
                             break;
+                        case 'c':
+                            cell.setType(CellType.FLOOR);
+                            cell.setItem(new Crown(cell));
+                            break;
                         case 'p':
                             cell.setType(CellType.FLOOR);
                             new Spider(cell);
@@ -78,9 +83,6 @@ public class MapLoader {
                             break;
                         case 'u':
                             cell.setType(CellType.SKULL);
-                            break;
-                        case 'c':
-                            cell.setType(CellType.CROWN);
                             break;
                         case 'e':
                             cell.setType(CellType.WEB);

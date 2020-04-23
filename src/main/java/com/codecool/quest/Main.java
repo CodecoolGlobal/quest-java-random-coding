@@ -23,6 +23,8 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Label inventoryLabel = new Label();
+//    Label wonLabel = new Label();
+//    Label loseLabel = new Label();
     static Button button = new Button("Pick up");
     public static Inventory inventory = new Inventory();
     private InventoryUI inventoryui = new InventoryUI();
@@ -44,7 +46,10 @@ public class Main extends Application {
         rightPanel.add(inventoryPanel, 0, 6);
         rightPanel.add(new Label("Health: "), 0, 0);
         rightPanel.add(healthLabel, 1, 0);
-
+//        rightPanel.add(new Label("You Won!"), 0, 12);
+//        rightPanel.add(wonLabel, 5, 0);
+//        rightPanel.add(new Label("You Lose!"), 0, 11);
+//        rightPanel.add(loseLabel, 5, 0);
         rightPanel.add(new Label("Inventory: "), 0, 1);
         rightPanel.add(inventoryLabel, 1, 0);
         Canvas inventoryCanvas = new Canvas(
@@ -53,6 +58,8 @@ public class Main extends Application {
         rightPanel.add(inventoryCanvas, 0, 0);
 
         rightPanel.add(button, 6, 10);
+//        loseLabel.setVisible(true);
+//        wonLabel.setVisible(true);
         button.setVisible(false);
 
 
@@ -78,7 +85,7 @@ public class Main extends Application {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-        if (map.getPlayer().getHealth() != 0) {
+        if (map.getPlayer().getHealth() != 0 && !inventory.getInventoryList().contains("crown")) {
             switch (keyEvent.getCode()) {
                 case UP:
                     map.getPlayer().move(0, -1);

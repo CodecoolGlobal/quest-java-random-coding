@@ -9,7 +9,6 @@ public enum CellType {
     TREE("tree"),
     FOOD("apple"),
     RIVER("river"),
-    CROWN("crown"),
     SKULL("skull"),
     WEB("web"),
     TURN("turn"),
