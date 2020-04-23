@@ -27,10 +27,18 @@ public abstract class Actor extends AbstractDrawable {
               health-=2;
             }
         }
+        if (nextCell.getTileName().equals("apple")){
+            health+=5;
+        }
+
         if (Main.inventory.getInventoryList().contains("sword")){
             strikeForce = 8;
+
         }
-        if ((nextCell.getTileName().equals("floor")) && !(nextCell.hasActor()) || nextCell.getTileName().equals("open_door")) {
+        if ((nextCell.getTileName().equals("floor")) && !(nextCell.hasActor()) || nextCell.getTileName().equals("open_door") || nextCell.getTileName().equals("apple")) {
+            if (cell.getTileName().equals("apple")){
+                cell.setType(CellType.FLOOR);
+            }
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;

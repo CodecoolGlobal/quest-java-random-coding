@@ -35,8 +35,8 @@ public class Tiles {
         tileMap.put("closed_door", new Tile(9,10));
         tileMap.put("spider", new Tile(29,5));
         tileMap.put("goblin", new Tile(29,2));
-        tileMap.put("closed_door", new Tile(9, 10));
         tileMap.put("tree", new Tile(1, 1));
+        tileMap.put("apple", new Tile(15, 29));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
