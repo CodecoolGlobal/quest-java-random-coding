@@ -1,4 +1,5 @@
 package com.codecool.quest;
+
 import com.codecool.quest.inventoryui.*;
 import com.codecool.quest.logic.*;
 import javafx.application.Application;
@@ -25,6 +26,7 @@ public class Main extends Application {
     static Button button = new Button("Pick up");
     public static Inventory inventory = new Inventory();
     private InventoryUI inventoryui = new InventoryUI();
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -39,7 +41,7 @@ public class Main extends Application {
         GridPane.setConstraints(label, 10, 20);
         inventoryui.setInventoryUI(inventoryPanel);
         inventory.setUI(inventoryui);
-        rightPanel.add(inventoryPanel, 0,6);
+        rightPanel.add(inventoryPanel, 0, 6);
         rightPanel.add(new Label("Health: "), 0, 0);
         rightPanel.add(healthLabel, 1, 0);
 
@@ -54,13 +56,13 @@ public class Main extends Application {
         button.setVisible(false);
 
 
-
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(canvas);
         borderPane.setRight(rightPanel);
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
+
         refresh();
         button.setOnAction(actionEvent -> {
             inventory.addItem(map.getPlayer().getCell().getItem().getTileName());
@@ -76,31 +78,34 @@ public class Main extends Application {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
-            case UP:
-                map.getPlayer().move(0, -1);
-                refresh();
-                break;
-            case DOWN:
-                map.getPlayer().move(0, 1);
-                refresh();
-                break;
-            case LEFT:
-                map.getPlayer().move(-1, 0);
-                refresh();
-                break;
-            case RIGHT:
-                map.getPlayer().move(1,0);
-                refresh();
-                break;
+        if (map.getPlayer().getHealth() != 0) {
+            switch (keyEvent.getCode()) {
+                case UP:
+                    map.getPlayer().move(0, -1);
+                    refresh();
+                    break;
+                case DOWN:
+                    map.getPlayer().move(0, 1);
+                    refresh();
+                    break;
+                case LEFT:
+                    map.getPlayer().move(-1, 0);
+                    refresh();
+                    break;
+                case RIGHT:
+                    map.getPlayer().move(1, 0);
+                    refresh();
+                    break;
+            }
         }
+
     }
 
-    public  static void showPickUpButton(){
+    public static void showPickUpButton() {
         button.setVisible(true);
     }
 
-    public  static void hidePickUpButton(){
+    public static void hidePickUpButton() {
         button.setVisible(false);
     }
 
@@ -112,12 +117,10 @@ public class Main extends Application {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null) {
-                    Tiles.drawTile(context, cell.getActor(),x, y);
+                    Tiles.drawTile(context, cell.getActor(), x, y);
                 } else if (cell.getItem() != null) {
-                    Tiles.drawTile(context, cell.getItem(),x, y);
-                }
-
-                else {
+                    Tiles.drawTile(context, cell.getItem(), x, y);
+                } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
             }

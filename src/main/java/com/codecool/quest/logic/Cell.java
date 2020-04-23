@@ -70,4 +70,8 @@ public class Cell implements Drawable {
     public boolean hasActor() {
         return actor != null;
     }
+
+    public boolean hasItem() {
+        return item != null;
+    }
 }

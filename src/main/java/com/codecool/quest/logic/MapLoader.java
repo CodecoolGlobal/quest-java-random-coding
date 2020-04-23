@@ -61,6 +61,9 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Goblin(cell);
                             break;
+                        case 'f':
+                            cell.setType(CellType.TREE);
+                            break;
 
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
