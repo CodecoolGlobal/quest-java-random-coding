@@ -4,6 +4,7 @@ import com.codecool.quest.logic.actors.Goblin;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.actors.Spider;
+import com.codecool.quest.logic.items.Rod;
 import com.codecool.quest.logic.items.Sword;
 import com.codecool.quest.logic.items.Key;
 import java.io.InputStream;
@@ -48,6 +49,10 @@ public class MapLoader {
                         case 'w':
                             cell.setType(CellType.FLOOR);
                             cell.setItem(new Sword(cell));
+                            break;
+                        case 'r':
+                            cell.setType(CellType.FLOOR);
+                            cell.setItem(new Rod(cell));
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
