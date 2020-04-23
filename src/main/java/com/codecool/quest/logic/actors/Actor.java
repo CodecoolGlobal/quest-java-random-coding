@@ -22,7 +22,7 @@ public abstract class Actor extends AbstractDrawable {
                 nextCell.setActor(null);
             }
         }
-        if (!nextCell.getTileName().equals("wall") && !(nextCell.hasActor()) && !nextCell.getTileName().equals("closed_door")) {
+        if ((nextCell.getTileName().equals("floor")) && !(nextCell.hasActor()) || nextCell.getTileName().equals("open_door")) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
