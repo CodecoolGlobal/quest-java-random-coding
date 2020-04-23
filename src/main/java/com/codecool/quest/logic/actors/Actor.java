@@ -8,7 +8,6 @@ public abstract class Actor extends AbstractDrawable {
     private int strikeForce = 5;
 
 
-
     public Actor(Cell cell) {
         super(cell);
         cell.setActor(this);
@@ -23,20 +22,20 @@ public abstract class Actor extends AbstractDrawable {
             if (enemy.getHealth() <= 0) {
                 nextCell.setActor(null);
             }
-            if (enemy.getHealth() > 0){
-              health-=2;
+            if (enemy.getHealth() > 0) {
+                health -= 2;
             }
         }
-        if (nextCell.getTileName().equals("apple")){
-            health+=5;
+        if (nextCell.getTileName().equals("apple")) {
+            health += 5;
         }
 
-        if (Main.inventory.getInventoryList().contains("sword")){
+        if (Main.inventory.getInventoryList().contains("sword") || Main.inventory.getInventoryList().contains("rod")) {
             strikeForce = 8;
 
         }
         if ((nextCell.getTileName().equals("floor")) && !(nextCell.hasActor()) || nextCell.getTileName().equals("open_door") || nextCell.getTileName().equals("apple")) {
-            if (cell.getTileName().equals("apple")){
+            if (cell.getTileName().equals("apple")) {
                 cell.setType(CellType.FLOOR);
             }
             cell.setActor(null);
@@ -53,7 +52,6 @@ public abstract class Actor extends AbstractDrawable {
             nextCell.setType(CellType.OPEN);
             Main.inventory.removeItem("key");
         }
-
 
 
     }
