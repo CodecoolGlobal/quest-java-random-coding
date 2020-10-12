@@ -27,8 +27,26 @@ public class Tiles {
         tileMap.put("empty", new Tile(0, 0));
         tileMap.put("wall", new Tile(10, 17));
         tileMap.put("floor", new Tile(2, 0));
-        tileMap.put("player", new Tile(27, 0));
+        tileMap.put("player", new Tile(25, 0));
+        tileMap.put("warrior", new Tile(28,0));
+        tileMap.put("mage", new Tile(24,1));
         tileMap.put("skeleton", new Tile(29, 6));
+        tileMap.put("sword", new Tile(0,30));
+        tileMap.put("rod", new Tile(1,27));
+        tileMap.put("key", new Tile(16,23));
+        tileMap.put("open_door", new Tile(8,10));
+        tileMap.put("closed_door", new Tile(9,10));
+        tileMap.put("spider", new Tile(29,5));
+        tileMap.put("goblin", new Tile(29,2));
+        tileMap.put("tree", new Tile(1, 1));
+        tileMap.put("apple", new Tile(15, 29));
+        tileMap.put("crown", new Tile(11, 24));
+        tileMap.put("river", new Tile(12, 5));
+        tileMap.put("skull", new Tile(0, 15));
+        tileMap.put("boss", new Tile(30, 6));
+        tileMap.put("web", new Tile(31, 12));
+        tileMap.put("turn", new Tile(13, 5));
+        tileMap.put("circle", new Tile(14, 5));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
