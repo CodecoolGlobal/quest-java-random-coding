@@ -53,8 +53,6 @@ public abstract class Actor extends AbstractDrawable {
             nextCell.setType(CellType.OPEN);
             Main.inventory.removeItem("key");
         }
-
-
     }
 
 
