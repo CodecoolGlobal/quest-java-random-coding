@@ -1,6 +1,7 @@
 # Codecool Quest
 
 This is a simple tile-based RPG game.
+Created with Java SE and JavaFx
 
 ## Opening the project
 
